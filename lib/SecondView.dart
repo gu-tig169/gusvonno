@@ -88,7 +88,7 @@ final textEditingController = new TextEditingController();
         ),
         RaisedButton(
           onPressed: () {
-            Provider.of<MyState>(context, listen: false).addItem(Item(name: textEditingController.text));
+            Provider.of<MyState>(context, listen: false).addItems(Item(name: textEditingController.text));
             Navigator.popAndPushNamed(context, "/");
 
           },
