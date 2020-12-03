@@ -1,33 +1,44 @@
 import 'package:flutter/material.dart';
-
+import 'package:gusvonnoapp/ApiRequest.dart';
 
 class Item { 
+String id;
 String name;
 bool isDone;
 
 
-Item ({this.name, this.isDone = false});  
 
-
+Item ({this.id, this.name, this.isDone = false});  
 
 }
+
+
 
 class MyState extends ChangeNotifier {
 
 List<Item>_list = [];
-List<Item> get list => _list;
-
-
-void addItem( Item item) {
-_list.add(item);
-notifyListeners();
-
-}
-  void removeTodo(Item item) {
-    _list.remove(item);
+ void postMyList() async {
+    this._list = await ApiRequest.getMyItems();
     notifyListeners();
-}
+  }
 
+
+ void addItems(Item item) async {
+    _list = await ApiRequest.postMyItems(item);
+    notifyListeners();
+  }
+  
+ void putMyItems(Item item) async {
+    _list = await ApiRequest.putMyItem(item);
+    notifyListeners();
+  }
+
+  void removeMyItems(Item item) async {
+    _list = await ApiRequest.deleteMyItems(item);
+    notifyListeners();
+  }
+
+ 
 List<Item> filteredList(String filter) {
     if (filter == "Done") {
       return _list.where((item) => item.isDone == true).toList();
@@ -37,5 +48,4 @@ List<Item> filteredList(String filter) {
 
     return _list;
   }
-
 }

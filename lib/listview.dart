@@ -14,6 +14,8 @@ import './model.dart';
      
   }
   class _ItemListState extends State<ItemList> {
+ 
+ 
   @override
   Widget build(BuildContext context) {
    return ListView.builder(
@@ -29,7 +31,9 @@ Widget _item(Item item) {
           value: item.isDone,
           onChanged: (bool value) {
             setState(() {
-              item.isDone = value;  }
+              item.isDone = value;  
+              Provider.of<MyState>(context, listen: false).putMyItems(item);
+              }
             ); 
             },
       ),
@@ -41,7 +45,7 @@ Widget _item(Item item) {
            
             onPressed: () {
               Provider.of<MyState>(context, listen: false)
-                  .removeTodo(item);
+                  .removeMyItems(item);
             },
           ),
 
