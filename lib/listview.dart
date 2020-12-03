@@ -31,13 +31,17 @@ Widget _item(Item item) {
           value: item.isDone,
           onChanged: (bool value) {
             setState(() {
-              item.isDone = value;  
+              item.isDone = value;
               Provider.of<MyState>(context, listen: false).putMyItems(item);
               }
             ); 
             },
       ),
-      title: Text(item.name, style: TextStyle(fontStyle: FontStyle.italic, color: Colors.black)),
+      title: Text(item.name, 
+      style: TextStyle(decoration: item.isDone
+                        ? TextDecoration.lineThrough
+                        : TextDecoration.none,
+                    fontSize: 18)), 
       
     trailing: IconButton(
             color: Colors.black,

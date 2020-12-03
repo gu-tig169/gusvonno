@@ -5,6 +5,7 @@ import './model.dart';
 import 'SecondView.dart';
 void main() {
   var state = MyState();
+  state.postMyList();
   runApp((ChangeNotifierProvider(create: (context) => state, child: MyApp(),)));
 }
 
